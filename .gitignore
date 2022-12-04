@@ -89,6 +89,7 @@ build/
 .idea/libraries-with-intellij-classes.xml
 .idea/misc.xml
 .idea/protoeditor.xml
+.idea/sonarlint/
 node_modules/
 .rpt2_cache/
 libraries/tools/kotlin-test-js-runner/lib/
@@ -99,3 +100,5 @@ outTmp/
 /test.output
 /kotlin-native/dist
 kotlin-ide/
+out/**
+out/production/adventofcode22/META-INF/adventofcode22.kotlin_module
