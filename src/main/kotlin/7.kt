@@ -20,8 +20,22 @@ data class Filinger(val name: String, val fileSize: Long, val directory: Directo
 fun main() {
     val rootDirectory = File("input7.txt").readLines().parseCommands()
 
+    printDirectoryRecursive(rootDirectory, 0)
     part1(rootDirectory)
     part2(rootDirectory)
+}
+
+private fun printDirectoryRecursive(directory: Directory, currentDepth: Int){
+    print("  ".repeat(currentDepth))
+    println("- ${directory.name} (dir, size=${directory.fileSizes})")
+    directory.subDirectories.forEach { subDirectory ->
+        printDirectoryRecursive(subDirectory, currentDepth + 1)
+    }
+
+    directory.files.forEach { file ->
+        print("  ".repeat(currentDepth + 1))
+        println("- ${file.name} (file, size=${file.fileSize})")
+    }
 }
 
 private fun part1(rootDirectory: Directory) {
