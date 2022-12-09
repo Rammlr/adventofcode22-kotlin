@@ -30,14 +30,16 @@ fun main() {
             repeat(distance) {
                 headPosition = headPosition.moveOnce(direction)
 
-                tailPosition = simulateTail(headPosition, tailPosition, markedPointsPart1)
+                tailPosition = simulateTail(headPosition, tailPosition)
+                markedPointsPart1.add(tailPosition)
+
                 (0 until tailPositions.size).forEach { index ->
                     tailPositions[index] = simulateTail(
                         tailPositions.getOrElse(index - 1) { headPosition },
                         tailPositions[index],
-                        if(index == tailPositions.size -1) markedPointsPart2 else null,
                     )
                 }
+                markedPointsPart2.add(tailPositions.last())
             }
         }
     }
@@ -49,7 +51,6 @@ fun main() {
 private fun simulateTail(
     headPosition: Pair<Int, Int>,
     tailPosition: Pair<Int, Int>,
-    markedPoints: MutableSet<Pair<Int, Int>>?
 ): Pair<Int, Int> {
     var newTailPosition = tailPosition
     val distance = distance(headPosition, newTailPosition)
@@ -57,7 +58,6 @@ private fun simulateTail(
         getDirectionsToMove(newTailPosition, headPosition).forEach { directionToMove ->
             newTailPosition = newTailPosition.moveOnce(directionToMove)
         }
-        markedPoints?.add(newTailPosition)
     }
     return newTailPosition
 }
